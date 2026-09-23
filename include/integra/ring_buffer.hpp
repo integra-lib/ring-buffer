@@ -1,6 +1,5 @@
 #pragma once
 #include <array>
-#include <atomic>
 #include <cstddef>
 
 namespace integra
@@ -69,7 +68,11 @@ private:
     ArrayType m_buf{};
     ArrayType::iterator m_r{m_buf.begin()};
     ArrayType::iterator m_w{m_buf.begin()};
-    std::atomic<std::size_t> m_size{};
+    // Deliberately not std::atomic: the buffer is documented as not thread safe, so
+    // an atomic bought nothing here, and its read-modify-write compiled to calls into
+    // libatomic on cores without atomic instructions (Cortex-M0, RV32 without the A
+    // extension), which a bare-metal toolchain does not ship: the link failed.
+    std::size_t m_size{};
 };
 
 } // namespace integra
