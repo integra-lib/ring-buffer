@@ -1,27 +1,27 @@
 #include <gtest/gtest.h>
 
 #include <cstdint>
-#include <integra/ring_buffer.hpp>
+#include <hwlib/data_structures/ring_buffer.hpp>
 
 namespace
 {
 
 TEST(RingBufferTest, IsEmptyAfterConstruction)
 {
-    const integra::RingBuffer<std::uint16_t, 4> buffer;
+    const hwlib::data_structures::RingBuffer<std::uint16_t, 4> buffer;
     EXPECT_TRUE(buffer.IsEmpty());
 }
 
 TEST(RingBufferTest, PopReturnsFalseWhenEmpty)
 {
-    integra::RingBuffer<std::uint16_t, 4> buffer;
+    hwlib::data_structures::RingBuffer<std::uint16_t, 4> buffer;
     std::uint16_t value{};
     EXPECT_FALSE(buffer.Pop(value));
 }
 
 TEST(RingBufferTest, PopsInPushOrder)
 {
-    integra::RingBuffer<std::uint16_t, 4> buffer;
+    hwlib::data_structures::RingBuffer<std::uint16_t, 4> buffer;
     buffer.Push(1U);
     buffer.Push(2U);
     buffer.Push(3U);
@@ -38,7 +38,7 @@ TEST(RingBufferTest, PopsInPushOrder)
 
 TEST(RingBufferTest, WrapsAroundTheStorage)
 {
-    integra::RingBuffer<std::uint16_t, 3> buffer;
+    hwlib::data_structures::RingBuffer<std::uint16_t, 3> buffer;
     buffer.Push(1U);
     buffer.Push(2U);
     buffer.Push(3U);
@@ -59,7 +59,7 @@ TEST(RingBufferTest, WrapsAroundTheStorage)
 
 TEST(RingBufferTest, DropsValuePushedIntoFullBuffer)
 {
-    integra::RingBuffer<std::uint16_t, 2> buffer;
+    hwlib::data_structures::RingBuffer<std::uint16_t, 2> buffer;
     buffer.Push(1U);
     buffer.Push(2U);
     buffer.Push(3U);
@@ -74,7 +74,7 @@ TEST(RingBufferTest, DropsValuePushedIntoFullBuffer)
 
 TEST(RingBufferTest, ClearDiscardsContent)
 {
-    integra::RingBuffer<std::uint16_t, 4> buffer;
+    hwlib::data_structures::RingBuffer<std::uint16_t, 4> buffer;
     buffer.Push(1U);
     buffer.Push(2U);
     buffer.Clear();

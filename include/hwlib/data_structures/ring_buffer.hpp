@@ -2,7 +2,7 @@
 #include <array>
 #include <cstddef>
 
-namespace integra
+namespace hwlib::data_structures
 {
 
 /// @brief Fixed-size ring buffer
@@ -75,4 +75,4 @@ private:
     std::size_t m_size{};
 };
 
-} // namespace integra
+} // namespace hwlib::data_structures

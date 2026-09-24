@@ -2,23 +2,23 @@
 
 Fixed-size ring buffer over std::array; allocates nothing and drops a value pushed into a full buffer.
 
-Part of [integra-lib](https://github.com/integra-lib) — architecture-independent C++20
+Part of [hwlib](https://github.com/integra-lib) — architecture-independent C++20
 components shared between firmware projects. Header-only,
 no exceptions, no RTTI.
 
 ## Use it
 
 ```bash
-git submodule add git@github.com:integra-lib/ring-buffer.git external/integra/ring-buffer
+git submodule add git@github.com:integra-lib/ring-buffer.git external/hwlib/ring-buffer
 ```
 
 ```cmake
-add_subdirectory(external/integra/ring-buffer)
-target_link_libraries(app PRIVATE Integra::ring_buffer)
+add_subdirectory(external/hwlib/ring-buffer)
+target_link_libraries(app PRIVATE Hwlib::ring_buffer)
 ```
 
 ```cpp
-#include <integra/ring_buffer.hpp>
+#include <hwlib/data_structures/ring_buffer.hpp>
 ```
 
 Each component carries its own include directory, so this header stays unreachable
@@ -31,9 +31,9 @@ Every component is released on its own, tagged `vX.Y.Z`. Pre-1.0, a minor releas
 break the API, which is why dependants accept a single minor.
 
 ```bash
-git -C external/integra/ring-buffer fetch --tags
-git -C external/integra/ring-buffer checkout v0.2.0
-git add external/integra/ring-buffer && git commit -m "build: bump ring-buffer to v0.2.0"
+git -C external/hwlib/ring-buffer fetch --tags
+git -C external/hwlib/ring-buffer checkout v0.2.0
+git add external/hwlib/ring-buffer && git commit -m "build: bump ring-buffer to v0.2.0"
 ```
 
 ## In a consumer's CI
